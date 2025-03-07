@@ -42,12 +42,6 @@
 
       <div class="blog-header">
         <h1>Blog Yazıları</h1>
-        <div id="adminControls" style="display: none">
-          <a href="blog-editor.html" class="add-blog-btn">
-            <i class="fas fa-plus"></i>
-            Yeni Yazı Ekle
-          </a>
-        </div>
       </div>
 
       <div class="blog-list">
@@ -194,12 +188,6 @@
       // Firebase'i başlat
       firebase.initializeApp(firebaseConfig);
       const db = firebase.firestore();
-
-      // Admin kontrolü
-      const isAdmin = localStorage.getItem("isAdmin") === "true";
-      if (isAdmin) {
-        document.getElementById("adminControls").style.display = "block";
-      }
 
       // Sayfa yüklendiğinde
       document.addEventListener("DOMContentLoaded", function () {

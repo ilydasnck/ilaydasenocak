@@ -9,9 +9,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
-    <!-- Firebase -->
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
   </head>
   <body>
     <header>
@@ -35,10 +32,7 @@
           <div class="blog-post-meta">
             <span><i class="far fa-calendar"></i> 25 Şubat 2024</span>
             <span><i class="far fa-user"></i> İlayda Şenocak</span>
-            <span
-              ><i class="far fa-comments"></i>
-              <span class="comment-count">0</span> Yorum</span
-            >
+            <span><i class="far fa-comments"></i> 7 Yorum</span>
           </div>
         </div>
 
@@ -118,30 +112,21 @@
       </article>
 
       <section class="blog-post-comments">
-        <h2>Yorumlar (<span class="comment-count">0</span>)</h2>
-        <div id="comments-container">
-          <!-- Yorumlar buraya dinamik olarak eklenecek -->
-        </div>
-
+        <h2>Yorumlar</h2>
         <div class="comment-form">
           <h3>Yorum Yap</h3>
-          <form id="commentForm">
+          <form>
             <div class="form-group">
-              <label for="name">Ad Soyad</label>
-              <input type="text" id="name" name="name" required />
+              <label for="name">İsim</label>
+              <input type="text" id="name" required />
             </div>
             <div class="form-group">
               <label for="email">E-posta</label>
-              <input type="email" id="email" name="email" required />
+              <input type="email" id="email" required />
             </div>
             <div class="form-group">
               <label for="comment">Yorumunuz</label>
-              <textarea
-                id="comment"
-                name="comment"
-                rows="5"
-                required
-              ></textarea>
+              <textarea id="comment" rows="5" required></textarea>
             </div>
             <button type="submit" class="submit-btn">Yorum Gönder</button>
           </form>
@@ -151,134 +136,11 @@
 
     <footer>
       <div class="social-links">
-        <a href="https://github.com/ilydasnck" target="_blank"
-          ><i class="fab fa-github"></i
-        ></a>
-        <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
-          ><i class="fab fa-instagram"></i
-        ></a>
-        <a href="https://www.linkedin.com/in/ilayda-senocak/" target="_blank"
-          ><i class="fab fa-linkedin"></i
-        ></a>
-        <a href="https://medium.com/@ilaydasenocak" target="_blank"
-          ><i class="fab fa-medium"></i
-        ></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
       </div>
       <p>&copy; 2024 Tüm hakları saklıdır.</p>
     </footer>
-
-    <script>
-      // Firebase yapılandırması
-      const firebaseConfig = {
-        apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
-        authDomain: "websayfam-6de23.firebaseapp.com",
-        projectId: "websayfam-6de23",
-        storageBucket: "websayfam-6de23.firebasestorage.app",
-        messagingSenderId: "876673752245",
-        appId: "1:876673752245:web:d8c4692cbc86df5b81b2fc",
-        measurementId: "G-WQZXBQRWDN",
-      };
-
-      // Firebase'i başlat
-      firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
-
-      // Sayfa yüklendiğinde
-      document.addEventListener("DOMContentLoaded", function () {
-        const commentForm = document.getElementById("commentForm");
-        const commentsContainer = document.getElementById("comments-container");
-        const commentCountElements =
-          document.querySelectorAll(".comment-count");
-
-        // Blog yazısının ID'sini URL'den al
-        const postId = window.location.pathname
-          .split("/")
-          .pop()
-          .replace(".html", "");
-
-        // Yorumları yükle
-        loadComments();
-
-        // Yorum formunu dinle
-        commentForm.addEventListener("submit", async function (e) {
-          e.preventDefault();
-
-          const name = document.getElementById("name").value;
-          const email = document.getElementById("email").value;
-          const comment = document.getElementById("comment").value;
-
-          try {
-            // Yorumu Firestore'a ekle
-            await db
-              .collection("blog-posts")
-              .doc(postId)
-              .collection("comments")
-              .add({
-                name: name,
-                email: email,
-                comment: comment,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              });
-
-            // Formu temizle
-            commentForm.reset();
-
-            // Yorumları yeniden yükle
-            loadComments();
-          } catch (error) {
-            console.error("Yorum gönderme hatası:", error);
-            alert(
-              "Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
-            );
-          }
-        });
-
-        // Yorumları yükleme fonksiyonu
-        async function loadComments() {
-          try {
-            const commentsSnapshot = await db
-              .collection("blog-posts")
-              .doc(postId)
-              .collection("comments")
-              .orderBy("timestamp", "desc")
-              .get();
-
-            // Yorum sayısını güncelle
-            const commentCount = commentsSnapshot.size;
-            commentCountElements.forEach(
-              (el) => (el.textContent = commentCount)
-            );
-
-            // Yorumları temizle
-            commentsContainer.innerHTML = "";
-
-            // Yorumları ekle
-            commentsSnapshot.forEach((doc) => {
-              const commentData = doc.data();
-              const commentElement = document.createElement("div");
-              commentElement.className = "comment";
-
-              const date = commentData.timestamp
-                ? commentData.timestamp.toDate().toLocaleDateString("tr-TR")
-                : "";
-
-              commentElement.innerHTML = `
-                <div class="comment-header">
-                  <strong>${commentData.name}</strong>
-                  <span>${date}</span>
-                </div>
-                <div class="comment-content">
-                  <p>${commentData.comment}</p>
-                </div>
-              `;
-
-              commentsContainer.appendChild(commentElement);
-            });
-          } catch (error) {
-            console.error("Yorumları yükleme hatası:", error);
-          }
-        }
-      });
-    </script>
   </body>
 </html>
