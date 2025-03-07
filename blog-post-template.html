@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Yazısı - İlayda Şenocak</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="../index.html">Ana Sayfa</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../iletisim.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="blog-post-main">
+      <article class="blog-post">
+        <div class="blog-post-header">
+          <div class="blog-post-title-container">
+            <h1 class="blog-post-title">Blog Yazısı Başlığı</h1>
+            <span class="blog-post-category">Kategori</span>
+          </div>
+          <div class="blog-post-meta">
+            <span><i class="far fa-calendar"></i> Tarih</span>
+            <span><i class="far fa-user"></i> İlayda Şenocak</span>
+            <span
+              ><i class="far fa-comments"></i>
+              <span class="comment-count">0</span> Yorum</span
+            >
+          </div>
+        </div>
+
+        <div class="blog-post-image">
+          <img src="../blog1.jpg" alt="Blog Yazısı Görseli" />
+        </div>
+
+        <div class="blog-post-content">
+          <!-- Blog içeriği buraya gelecek -->
+        </div>
+
+        <div class="blog-post-footer">
+          <div class="blog-post-tags">
+            <span class="tag">Etiket 1</span>
+            <span class="tag">Etiket 2</span>
+          </div>
+          <div class="blog-post-share">
+            <span>Paylaş:</span>
+            <a href="#" class="twitter-share"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="linkedin-share"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+          </div>
+        </div>
+      </article>
+
+      <section class="blog-post-comments">
+        <h2>Yorumlar (<span class="comment-count">0</span>)</h2>
+        <div id="comments-container">
+          <!-- Yorumlar buraya dinamik olarak eklenecek -->
+        </div>
+
+        <div class="comment-form">
+          <h3>Yorum Yap</h3>
+          <form id="commentForm">
+            <div class="form-group">
+              <label for="name">Ad Soyad</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-posta</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="comment">Yorumunuz</label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Yorum Gönder</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/ilydasnck" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/ilayda-senocak/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://medium.com/@ilaydasenocak" target="_blank"
+          ><i class="fab fa-medium"></i
+        ></a>
+      </div>
+      <p>&copy; 2024 Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+      // Firebase yapılandırması
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
+        authDomain: "websayfam-6de23.firebaseapp.com",
+        projectId: "websayfam-6de23",
+        storageBucket: "websayfam-6de23.firebasestorage.app",
+        messagingSenderId: "876673752245",
+        appId: "1:876673752245:web:d8c4692cbc86df5b81b2fc",
+        measurementId: "G-WQZXBQRWDN",
+      };
+
+      // Firebase'i başlat
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Sayfa yüklendiğinde
+      document.addEventListener("DOMContentLoaded", function () {
+        const commentForm = document.getElementById("commentForm");
+        const commentsContainer = document.getElementById("comments-container");
+        const commentCountElements =
+          document.querySelectorAll(".comment-count");
+
+        // Blog yazısının ID'sini URL'den al
+        const postId = window.location.pathname
+          .split("/")
+          .pop()
+          .replace(".html", "");
+
+        // Yorumları yükle
+        loadComments();
+
+        // Yorum formunu dinle
+        commentForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const comment = document.getElementById("comment").value;
+
+          try {
+            // Yorumu Firestore'a ekle
+            await db
+              .collection("blog-posts")
+              .doc(postId)
+              .collection("comments")
+              .add({
+                name: name,
+                email: email,
+                comment: comment,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              });
+
+            // Formu temizle
+            commentForm.reset();
+
+            // Yorumları yeniden yükle
+            loadComments();
+          } catch (error) {
+            console.error("Yorum gönderme hatası:", error);
+            alert(
+              "Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+            );
+          }
+        });
+
+        // Yorumları yükleme fonksiyonu
+        async function loadComments() {
+          try {
+            const commentsSnapshot = await db
+              .collection("blog-posts")
+              .doc(postId)
+              .collection("comments")
+              .orderBy("timestamp", "desc")
+              .get();
+
+            // Yorum sayısını güncelle
+            const commentCount = commentsSnapshot.size;
+            commentCountElements.forEach(
+              (el) => (el.textContent = commentCount)
+            );
+
+            // Yorumları temizle
+            commentsContainer.innerHTML = "";
+
+            // Yorumları ekle
+            commentsSnapshot.forEach((doc) => {
+              const commentData = doc.data();
+              const commentElement = document.createElement("div");
+              commentElement.className = "comment";
+
+              const date = commentData.timestamp
+                ? commentData.timestamp.toDate().toLocaleDateString("tr-TR")
+                : "";
+
+              commentElement.innerHTML = `
+                <div class="comment-header">
+                  <strong>${commentData.name}</strong>
+                  <span>${date}</span>
+                </div>
+                <div class="comment-content">
+                  <p>${commentData.comment}</p>
+                </div>
+              `;
+
+              commentsContainer.appendChild(commentElement);
+            });
+          } catch (error) {
+            console.error("Yorumları yükleme hatası:", error);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog - İlayda Şenocak</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  </head>
+  <body>
+    <a href="index.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      <span>Ana Sayfaya Dön</span>
+    </a>
+
+    <header>
+      <nav>
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+          <li><a href="index.html">Ana Sayfa</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="iletisim.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="blog-main">
+      <div class="blog-filters">
+        <button class="category-btn active" data-category="all">Tümü</button>
+        <button class="category-btn" data-category="teknoloji">
+          Teknoloji
+        </button>
+        <button class="category-btn" data-category="yazilim">Yazılım</button>
+        <button class="category-btn" data-category="tasarim">Tasarım</button>
+      </div>
+
+      <div class="blog-header">
+        <h1>Blog Yazıları</h1>
+        <div id="adminControls" style="display: none">
+          <a href="blog-editor.html" class="add-blog-btn">
+            <i class="fas fa-plus"></i>
+            Yeni Yazı Ekle
+          </a>
+        </div>
+      </div>
+
+      <div class="blog-list">
+        <article class="blog-item" data-category="teknoloji">
+          <a href="blog-posts/yapay-zeka-ve-gelecek.html" class="blog-link">
+            <div class="blog-item-image">
+              <img src="blog1.jpg" alt="Yapay Zeka ve Gelecek" />
+              <div class="blog-category">Teknoloji</div>
+            </div>
+            <div class="blog-item-content">
+              <h2>Yapay Zeka ve Gelecek</h2>
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 1 Mart 2024</span>
+                <span><i class="far fa-user"></i> İlayda Şenocak</span>
+                <span
+                  ><i class="far fa-comments"></i>
+                  <span
+                    class="comment-count"
+                    data-post-id="yapay-zeka-ve-gelecek"
+                    >0</span
+                  >
+                  Yorum</span
+                >
+              </div>
+              <p>
+                Yapay zeka teknolojilerinin günlük hayatımıza etkileri ve
+                gelecekte bizi bekleyen değişimler hakkında detaylı bir analiz.
+              </p>
+              <span class="read-more"
+                >Devamını Oku <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="blog-item" data-category="yazilim">
+          <a href="blog-posts/modern-web-gelistirme.html" class="blog-link">
+            <div class="blog-item-image">
+              <img src="blog2.jpg" alt="Modern Web Geliştirme" />
+              <div class="blog-category">Yazılım</div>
+            </div>
+            <div class="blog-item-content">
+              <h2>Modern Web Geliştirme Teknikleri</h2>
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 28 Şubat 2024</span>
+                <span><i class="far fa-user"></i> İlayda Şenocak</span>
+                <span
+                  ><i class="far fa-comments"></i>
+                  <span
+                    class="comment-count"
+                    data-post-id="modern-web-gelistirme"
+                    >0</span
+                  >
+                  Yorum</span
+                >
+              </div>
+              <p>
+                Günümüz web geliştirme dünyasında kullanılan modern teknikler ve
+                en iyi uygulamalar hakkında kapsamlı bir rehber.
+              </p>
+              <span class="read-more"
+                >Devamını Oku <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+        </article>
+
+        <article class="blog-item" data-category="tasarim">
+          <a href="blog-posts/ui-ux-tasarim-trendleri.html" class="blog-link">
+            <div class="blog-item-image">
+              <img src="blog3.jpg" alt="UI/UX Tasarım Trendleri" />
+              <div class="blog-category">Tasarım</div>
+            </div>
+            <div class="blog-item-content">
+              <h2>2024 UI/UX Tasarım Trendleri</h2>
+              <div class="blog-meta">
+                <span><i class="far fa-calendar"></i> 25 Şubat 2024</span>
+                <span><i class="far fa-user"></i> İlayda Şenocak</span>
+                <span
+                  ><i class="far fa-comments"></i>
+                  <span
+                    class="comment-count"
+                    data-post-id="ui-ux-tasarim-trendleri"
+                    >0</span
+                  >
+                  Yorum</span
+                >
+              </div>
+              <p>
+                Bu yılın öne çıkan kullanıcı arayüzü ve deneyimi tasarım
+                trendlerini ve başarılı uygulama örneklerini inceliyoruz.
+              </p>
+              <span class="read-more"
+                >Devamını Oku <i class="fas fa-arrow-right"></i
+              ></span>
+            </div>
+          </a>
+        </article>
+      </div>
+
+      <div class="pagination">
+        <button class="pagination-btn" disabled>
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="pagination-btn active">1</button>
+        <button class="pagination-btn">2</button>
+        <button class="pagination-btn">3</button>
+        <button class="pagination-btn">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/ilydasnck" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/ilayda-senocak/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://medium.com/@ilaydasenocak" target="_blank"
+          ><i class="fab fa-medium"></i
+        ></a>
+      </div>
+      <p>&copy; 2024 Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+      // Firebase yapılandırması
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
+        authDomain: "websayfam-6de23.firebaseapp.com",
+        projectId: "websayfam-6de23",
+        storageBucket: "websayfam-6de23.firebasestorage.app",
+        messagingSenderId: "876673752245",
+        appId: "1:876673752245:web:d8c4692cbc86df5b81b2fc",
+        measurementId: "G-WQZXBQRWDN",
+      };
+
+      // Firebase'i başlat
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Admin kontrolü
+      const isAdmin = localStorage.getItem("isAdmin") === "true";
+      if (isAdmin) {
+        document.getElementById("adminControls").style.display = "block";
+      }
+
+      // Sayfa yüklendiğinde
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tüm yorum sayaçlarını güncelle
+        const commentCountElements =
+          document.querySelectorAll(".comment-count");
+
+        commentCountElements.forEach(async (element) => {
+          const postId = element.dataset.postId;
+          try {
+            const commentsSnapshot = await db
+              .collection("blog-posts")
+              .doc(postId)
+              .collection("comments")
+              .get();
+
+            element.textContent = commentsSnapshot.size;
+          } catch (error) {
+            console.error(`Yorum sayısı yükleme hatası (${postId}):`, error);
+          }
+        });
+
+        // Kategori filtreleme
+        const categoryButtons = document.querySelectorAll(".category-btn");
+        const blogItems = document.querySelectorAll(".blog-item");
+
+        categoryButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Aktif kategori butonunu güncelle
+            categoryButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const category = button.dataset.category;
+
+            // Blog öğelerini filtrele
+            blogItems.forEach((item) => {
+              if (category === "all" || item.dataset.category === category) {
+                item.style.display = "flex";
+              } else {
+                item.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

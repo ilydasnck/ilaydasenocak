@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yapay Zeka ve Gelecek - İlayda Şenocak</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Ana Sayfa</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../iletisim.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="blog-post-main">
+      <article class="blog-post">
+        <div class="blog-post-header">
+          <div class="blog-post-title-container">
+            <h1 class="blog-post-title">Yapay Zeka ve Gelecek</h1>
+            <span class="blog-post-category">Teknoloji</span>
+          </div>
+          <div class="blog-post-meta">
+            <span><i class="far fa-calendar"></i> 1 Mart 2024</span>
+            <span><i class="far fa-user"></i> İlayda Şenocak</span>
+            <span
+              ><i class="far fa-comments"></i>
+              <span class="comment-count">0</span> Yorum</span
+            >
+          </div>
+        </div>
+
+        <div class="blog-post-image">
+          <img src="../blog1.jpg" alt="Yapay Zeka ve Gelecek" />
+        </div>
+
+        <div class="blog-post-content">
+          <p>
+            Yapay zeka teknolojilerinin günlük hayatımıza etkileri ve gelecekte
+            bizi bekleyen değişimler hakkında detaylı bir analiz.
+          </p>
+
+          <h2>Yapay Zekanın Günümüzdeki Durumu</h2>
+          <p>
+            Yapay zeka teknolojileri her geçen gün hayatımızın daha fazla
+            alanına giriyor. Akıllı asistanlardan otonom araçlara, sağlık
+            hizmetlerinden eğitime kadar birçok alanda yapay zeka çözümleri
+            kullanılıyor.
+          </p>
+
+          <h2>Gelecekte Bizi Neler Bekliyor?</h2>
+          <ul>
+            <li>Daha akıllı ve kişiselleştirilmiş dijital asistanlar</li>
+            <li>Sağlık sektöründe erken teşhis ve tedavi planlaması</li>
+            <li>Eğitimde kişiselleştirilmiş öğrenme deneyimleri</li>
+            <li>Akıllı şehirler ve otonom ulaşım sistemleri</li>
+          </ul>
+
+          <h2>Yapay Zekanın Etik Boyutu</h2>
+          <p>
+            Yapay zeka teknolojilerinin gelişimi beraberinde bazı etik soruları
+            da getiriyor:
+          </p>
+          <ul>
+            <li>Veri gizliliği ve güvenliği</li>
+            <li>Yapay zekanın karar verme süreçlerindeki rolü</li>
+            <li>İş gücü üzerindeki potansiyel etkileri</li>
+            <li>Algoritmik önyargılar ve adil kullanım</li>
+          </ul>
+
+          <h2>Sonuç</h2>
+          <p>
+            Yapay zeka teknolojileri hayatımızı önemli ölçüde değiştirmeye devam
+            edecek. Bu değişime hazırlıklı olmak ve teknolojiyi sorumlu bir
+            şekilde kullanmak, geleceğimiz için kritik önem taşıyor.
+          </p>
+        </div>
+
+        <footer class="blog-post-footer">
+          <div class="blog-post-tags">
+            <span class="tag">Yapay Zeka</span>
+            <span class="tag">Teknoloji</span>
+            <span class="tag">Gelecek</span>
+            <span class="tag">İnovasyon</span>
+          </div>
+          <div class="blog-post-share">
+            <span>Paylaş:</span>
+            <a href="#" class="twitter-share"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="linkedin-share"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="#" class="facebook-share"
+              ><i class="fab fa-facebook"></i
+            ></a>
+          </div>
+        </footer>
+      </article>
+
+      <section class="blog-post-comments">
+        <h2>Yorumlar (<span class="comment-count">0</span>)</h2>
+        <div id="comments-container">
+          <!-- Yorumlar buraya dinamik olarak eklenecek -->
+        </div>
+
+        <div class="comment-form">
+          <h3>Yorum Yap</h3>
+          <form id="commentForm">
+            <div class="form-group">
+              <label for="name">Ad Soyad</label>
+              <input type="text" id="name" name="name" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-posta</label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="form-group">
+              <label for="comment">Yorumunuz</label>
+              <textarea
+                id="comment"
+                name="comment"
+                rows="5"
+                required
+              ></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Yorum Gönder</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <p>&copy; 2024 Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+      // Firebase yapılandırması
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
+        authDomain: "websayfam-6de23.firebaseapp.com",
+        projectId: "websayfam-6de23",
+        storageBucket: "websayfam-6de23.firebasestorage.app",
+        messagingSenderId: "876673752245",
+        appId: "1:876673752245:web:d8c4692cbc86df5b81b2fc",
+        measurementId: "G-WQZXBQRWDN",
+      };
+
+      // Firebase'i başlat
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      // Sayfa yüklendiğinde
+      document.addEventListener("DOMContentLoaded", function () {
+        const commentForm = document.getElementById("commentForm");
+        const commentsContainer = document.getElementById("comments-container");
+        const commentCountElements =
+          document.querySelectorAll(".comment-count");
+
+        // Blog yazısının ID'sini URL'den al
+        const postId = window.location.pathname
+          .split("/")
+          .pop()
+          .replace(".html", "");
+
+        // Yorumları yükle
+        loadComments();
+
+        // Yorum formunu dinle
+        commentForm.addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const comment = document.getElementById("comment").value;
+
+          try {
+            // Yorumu Firestore'a ekle
+            await db
+              .collection("blog-posts")
+              .doc(postId)
+              .collection("comments")
+              .add({
+                name: name,
+                email: email,
+                comment: comment,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              });
+
+            // Formu temizle
+            commentForm.reset();
+
+            // Yorumları yeniden yükle
+            loadComments();
+          } catch (error) {
+            console.error("Yorum gönderme hatası:", error);
+            alert(
+              "Yorum gönderilirken bir hata oluştu. Lütfen tekrar deneyin."
+            );
+          }
+        });
+
+        // Yorumları yükleme fonksiyonu
+        async function loadComments() {
+          try {
+            const commentsSnapshot = await db
+              .collection("blog-posts")
+              .doc(postId)
+              .collection("comments")
+              .orderBy("timestamp", "desc")
+              .get();
+
+            // Yorum sayısını güncelle
+            const commentCount = commentsSnapshot.size;
+            commentCountElements.forEach(
+              (el) => (el.textContent = commentCount)
+            );
+
+            // Yorumları temizle
+            commentsContainer.innerHTML = "";
+
+            // Yorumları ekle
+            commentsSnapshot.forEach((doc) => {
+              const commentData = doc.data();
+              const commentElement = document.createElement("div");
+              commentElement.className = "comment";
+
+              const date = commentData.timestamp
+                ? commentData.timestamp.toDate().toLocaleDateString("tr-TR")
+                : "";
+
+              commentElement.innerHTML = `
+                <div class="comment-header">
+                  <strong>${commentData.name}</strong>
+                  <span>${date}</span>
+                </div>
+                <div class="comment-content">
+                  <p>${commentData.comment}</p>
+                </div>
+              `;
+
+              commentsContainer.appendChild(commentElement);
+            });
+          } catch (error) {
+            console.error("Yorumları yükleme hatası:", error);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

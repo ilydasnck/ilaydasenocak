@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Yazısı - İlayda Şenocak</title>
+    <link rel="stylesheet" href="../style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.2.0/github-markdown.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo">Logo</div>
+        <ul class="nav-links">
+          <li><a href="../index.html">Ana Sayfa</a></li>
+          <li><a href="../blog.html">Blog</a></li>
+          <li><a href="../iletisim.html">İletişim</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="blog-post-main">
+      <article class="blog-post">
+        <div class="blog-post-header">
+          <div class="blog-post-category"></div>
+          <h1 class="blog-post-title"></h1>
+          <div class="blog-post-meta">
+            <span
+              ><i class="far fa-calendar"></i> <span class="post-date"></span
+            ></span>
+            <span><i class="far fa-user"></i> İlayda Şenocak</span>
+            <span
+              ><i class="far fa-comments"></i>
+              <span class="comment-count"></span> Yorum</span
+            >
+          </div>
+        </div>
+
+        <div class="blog-post-image">
+          <img src="" alt="" />
+        </div>
+
+        <div class="blog-post-content markdown-body">
+          <!-- Markdown içeriği buraya gelecek -->
+        </div>
+
+        <div class="blog-post-footer">
+          <div class="blog-post-tags">
+            <!-- Etiketler buraya gelecek -->
+          </div>
+
+          <div class="blog-post-share">
+            <span>Paylaş:</span>
+            <a href="#" class="twitter-share"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="linkedin-share"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="#" class="facebook-share"
+              ><i class="fab fa-facebook"></i
+            ></a>
+          </div>
+        </div>
+      </article>
+
+      <div class="blog-post-comments">
+        <h2>Yorumlar</h2>
+        <div class="comments-list">
+          <!-- Yorumlar buraya gelecek -->
+        </div>
+
+        <form class="comment-form">
+          <h3>Yorum Yap</h3>
+          <div class="form-group">
+            <label for="name">İsim</label>
+            <input type="text" id="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-posta</label>
+            <input type="email" id="email" required />
+          </div>
+          <div class="form-group">
+            <label for="comment">Yorumunuz</label>
+            <textarea id="comment" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">Gönder</button>
+        </form>
+      </div>
+    </main>
+
+    <footer>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+      <p>&copy; 2024 Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.0.2/marked.min.js"></script>
+    <script>
+      // Markdown dosyasını yükle ve işle
+      async function loadMarkdown() {
+        try {
+          const response = await fetch("content.md");
+          const markdown = await response.text();
+          const content = marked.parse(markdown);
+          document.querySelector(".blog-post-content").innerHTML = content;
+
+          // Meta bilgileri güncelle
+          const metaMatch = markdown.match(/^---\n([\s\S]*?)\n---/);
+          if (metaMatch) {
+            const meta = metaMatch[1].split("\n").reduce((acc, line) => {
+              const [key, value] = line.split(": ");
+              if (key && value) {
+                acc[key.trim()] = value.trim();
+              }
+              return acc;
+            }, {});
+
+            // Başlık
+            document.title = `${meta.title} - İlayda Şenocak`;
+            document.querySelector(".blog-post-title").textContent = meta.title;
+
+            // Kategori
+            document.querySelector(".blog-post-category").textContent =
+              meta.category;
+
+            // Tarih
+            document.querySelector(".post-date").textContent = meta.date;
+
+            // Yorum sayısı
+            document.querySelector(".comment-count").textContent =
+              meta.comments || "0";
+
+            // Resim
+            const postImage = document.querySelector(".blog-post-image img");
+            postImage.src = meta.image;
+            postImage.alt = meta.title;
+
+            // Etiketler
+            if (meta.tags) {
+              const tags = meta.tags.split(",").map((tag) => tag.trim());
+              const tagsHtml = tags
+                .map((tag) => `<span class="tag">${tag}</span>`)
+                .join("");
+              document.querySelector(".blog-post-tags").innerHTML = tagsHtml;
+            }
+          }
+        } catch (error) {
+          console.error("Markdown yüklenirken hata oluştu:", error);
+        }
+      }
+
+      // Sayfa yüklendiğinde Markdown'ı yükle
+      document.addEventListener("DOMContentLoaded", loadMarkdown);
+    </script>
+  </body>
+</html>

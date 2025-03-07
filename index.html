@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İlayda ŞENOCAK - Kişisel Web Sitesi</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics-compat.js"></script>
+  </head>
+  <body>
+    <div id="particles-js"></div>
+    <header>
+      <nav>
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="index.html">Anasayfa</a></li>
+          <li><a href="#about">Hakkımda</a></li>
+          <li><a href="#portfolio">Deneyimlerim</a></li>
+          <li><a href="portfolio.html">Portfolyo</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="#contact">İletişim</a></li>
+          <li class="admin-only" style="display: none">
+            <a href="#messages" id="messagesLink">Mesajlar</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1 class="animated fadeInUp">İlayda ŞENOCAK</h1>
+          <p class="subtitle"><span id="typed"></span></p>
+          <div class="social-links">
+            <a href="https://github.com/ilydasnck" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+            <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/ilayda-senocak/"
+              target="_blank"
+              ><i class="fab fa-linkedin"></i
+            ></a>
+            <a href="https://medium.com/@ilaydasenocak" target="_blank"
+              ><i class="fab fa-medium"></i
+            ></a>
+          </div>
+        </div>
+        <div class="scroll-down">
+          <a href="#about"><i class="fas fa-chevron-down"></i></a>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <h2 class="animate-on-scroll fade-in-up">Hakkımda</h2>
+        <div class="about-content">
+          <img
+            src="profil.jpeg"
+            alt="Profil Fotoğrafı"
+            class="animate-on-scroll fade-in-left delay-1"
+          />
+          <div class="about-text">
+            <p class="animate-on-scroll fade-in-right delay-1">
+              Merhaba! Ben İlayda Şenocak, yazılım mühendisliği öğrencisiyim.
+              Mobil uygulama geliştirme, siber güvenlik ve web tasarımı
+              alanlarında çalışmalar yapıyor, özellikle React Native ile
+              projeler geliştiriyorum. Teknolojiye olan ilgimle sürekli kendimi
+              yeniliyor ve farklı projeler üreterek deneyimlerimi artırıyorum.
+            </p>
+            <p class="animate-on-scroll fade-in-right delay-2">
+              Şimdiye kadar çeşitli teknoloji projelerinde yer aldım, Teknofest
+              ve Tübitak projelerinde çalışıyorum . Aynı zamanda, gönüllü
+              çalışmalar ve topluluk etkinliklerine katılarak bilgi paylaşımında
+              bulunmayı ve ekip çalışması deneyimi kazanmayı önemsiyorum. Bu web
+              sitesinde geliştirdiğim projeleri, öğrendiklerimi ve deneyimlerimi
+              paylaşıyorum. Daha fazla bilgi almak ya da iletişime geçmek için
+              bana ulaşabilirsin!
+            </p>
+            <div class="about-buttons animate-on-scroll fade-in-up delay-3">
+              <a href="#" class="btn btn-primary">CV'mi Görüntüle</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skills">
+        <h2 class="animate-on-scroll fade-in-up">Yeteneklerim</h2>
+        <div class="skills-grid">
+          <div class="skill-item animate-on-scroll fade-in-up delay-1">
+            <i class="fas fa-code"></i>
+            <h3>Web Geliştirme</h3>
+            <p>HTML, CSS, JavaScript</p>
+          </div>
+          <div class="skill-item animate-on-scroll fade-in-up delay-2">
+            <i class="fas fa-paint-brush"></i>
+            <h3>Tasarım</h3>
+            <p>UI/UX, Grafik Tasarım</p>
+          </div>
+          <div class="skill-item animate-on-scroll fade-in-up delay-3">
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Mobil Uygulama</h3>
+            <p>iOS, Android</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="experience">
+        <div class="container">
+          <h2 class="animate-on-scroll fade-in-up">Deneyimlerim</h2>
+          <div class="experience-grid">
+            <div class="experience-item animate-on-scroll fade-in-up delay-1">
+              <div class="experience-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h3>Mobil Uygulama Geliştirme</h3>
+              <p>
+                React Native kullanarak çeşitli mobil uygulamalar geliştirdim.
+              </p>
+            </div>
+
+            <div class="experience-item animate-on-scroll fade-in-up delay-2">
+              <div class="experience-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h3>Siber Güvenlik</h3>
+              <p>
+                <strong>SiberVatan Dikey Uzmanlık Eğitimi</strong>'ne katılarak
+                bulut güvenliği konusunda eğitim aldım. Web güvenliği alanında
+                çalışarak <strong>XSS güvenlik açıklarını test ettim</strong> ve
+                sızma testleri üzerine deneyim kazandım.
+              </p>
+            </div>
+
+            <div class="experience-item animate-on-scroll fade-in-up delay-1">
+              <div class="experience-icon">
+                <i class="fas fa-code"></i>
+              </div>
+              <h3>Web Geliştirme</h3>
+              <p>
+                HTML, CSS ve JavaScript ile web projeleri geliştirdim.
+                <strong>webdenVeriCekme</strong> projesi kapsamında, verileri
+                otomatik olarak çekip işleyen bir sistem geliştirdim.
+              </p>
+            </div>
+
+            <div class="experience-item animate-on-scroll fade-in-up delay-2">
+              <div class="experience-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+              <h3>Akademik & Araştırma</h3>
+              <p>
+                <strong>TÜBİTAK STAR</strong> projesine başvurdum.
+                <strong>Afet sonrası psikolojik triyaj</strong> için karar
+                destek sistemi geliştirilmesi üzerine bir araştırma ekibine
+                katılmayı hedefledim.
+              </p>
+            </div>
+
+            <div class="experience-item animate-on-scroll fade-in-up delay-1">
+              <div class="experience-icon">
+                <i class="fas fa-lightbulb"></i>
+              </div>
+              <h3>Girişimcilik & Proje Yönetimi</h3>
+              <p>
+                <strong>Teknofest Girişimcilik Programı</strong> kapsamında,
+                yenilikçi bir proje geliştirme sürecinde yer aldım ve
+                <strong>ödül kazandım</strong>. <strong>Maskot</strong> projesi
+                ile karbon ayak izini azaltmayı amaçlayan bir sistem tasarladım.
+              </p>
+            </div>
+
+            <div class="experience-item animate-on-scroll fade-in-up delay-2">
+              <div class="experience-icon">
+                <i class="fas fa-trophy"></i>
+              </div>
+              <h3>Teknofest Deneyimlerim</h3>
+              <p>
+                <strong>Teknofest 2023</strong> ve
+                <strong>Teknofest Girişimcilik Programı</strong> kapsamında
+                çeşitli projelerde yer aldım.
+                <strong
+                  >Girişimcilik ve inovasyon odaklı çalışmalar yaparak ödül
+                  kazandım</strong
+                >. Yarışma sürecinde proje yönetimi, sunum teknikleri ve teknik
+                geliştirme süreçleri üzerine deneyim kazandım.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="contact">
+        <div class="container">
+          <h2 class="animate-on-scroll fade-in-up">İletişim</h2>
+          <div class="contact-container">
+            <div class="contact-info animate-on-scroll fade-in-left delay-1">
+              <div class="info-item">
+                <i class="fas fa-envelope"></i>
+                <div>
+                  <h3>E-posta</h3>
+                  <p>isenocak229@gmail.com</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                  <h3>Konum</h3>
+                  <p>Fırat Üniversitesi Teknoloji Fakültesi Elazığ, Türkiye</p>
+                </div>
+              </div>
+              <div class="map-container">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3123.0374976661287!2d39.19350809999999!3d38.6812801!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4076c0453873446b%3A0x8944e73c644c7182!2zRsSxcmF0IMOcbml2ZXJzaXRlc2kgVGVrbm9sb2ppIEZha8O8bHRlc2k!5e0!3m2!1str!2str!4v1709217947315!5m2!1str!2str"
+                  allowfullscreen=""
+                  loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"
+                >
+                </iframe>
+              </div>
+              <div class="social-links-contact">
+                <a href="https://github.com/ilydasnck" target="_blank"
+                  ><i class="fab fa-github"></i
+                ></a>
+                <a
+                  href="https://www.linkedin.com/in/ilayda-senocak/"
+                  target="_blank"
+                  ><i class="fab fa-linkedin"></i
+                ></a>
+                <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
+                  ><i class="fab fa-instagram"></i
+                ></a>
+                <a href="https://medium.com/@ilaydasenocak" target="_blank"
+                  ><i class="fab fa-medium"></i
+                ></a>
+              </div>
+            </div>
+            <div class="contact-form animate-on-scroll fade-in-right delay-2">
+              <form>
+                <div class="form-group">
+                  <label for="name">Ad Soyad</label>
+                  <input type="text" id="name" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="email">E-posta</label>
+                  <input type="email" id="email" name="email" required />
+                </div>
+                <div class="form-group">
+                  <label for="subject">Konu</label>
+                  <input type="text" id="subject" name="subject" required />
+                </div>
+                <div class="form-group">
+                  <label for="message">Mesaj</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Canlı Sohbet Kutusu -->
+    <div class="chat-widget">
+      <div class="chat-header" id="chatHeader">
+        <div class="chat-avatar">
+          <img src="profil.jpeg" alt="İlayda ŞENOCAK" />
+        </div>
+        <div class="chat-title">
+          <h3>İlayda ŞENOCAK</h3>
+          <p>Genellikle 1 saat içinde yanıt verir</p>
+        </div>
+        <button class="chat-toggle" id="chatToggle">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <div class="chat-messages" id="chatMessages">
+          <div class="message received">
+            <div class="message-content">
+              <p>
+                Merhaba, ben İlayda. Sana nasıl yardımcı olabilirim? Sana 1 dk.
+                içinde burada dönmezsem, bana mail adresini bırakabilirsin. 👋
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chat-input">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Mesajınızı yazın..."
+          />
+          <button id="sendMessage">
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="social-links">
+        <a href="https://github.com/ilydasnck" target="_blank"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a href="https://www.instagram.com/ilyda_snck/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://www.linkedin.com/in/ilayda-senocak/" target="_blank"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+        <a href="https://medium.com/@ilaydasenocak" target="_blank"
+          ><i class="fab fa-medium"></i
+        ></a>
+      </div>
+      <p>&copy; 2024 Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+      // Mobil menü için
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector(".hamburger");
+        const navLinks = document.querySelector(".nav-links");
+        const navLinksItems = document.querySelectorAll(".nav-links a");
+
+        hamburger.addEventListener("click", () => {
+          hamburger.classList.toggle("active");
+          navLinks.classList.toggle("active");
+        });
+
+        navLinksItems.forEach((item) => {
+          item.addEventListener("click", () => {
+            hamburger.classList.remove("active");
+            navLinks.classList.remove("active");
+          });
+        });
+      });
+
+      // Header scroll efekti
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        if (window.scrollY > 50) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+
+        // Scroll animasyonu için elementleri seç
+        const animateElements = document.querySelectorAll(".animate-on-scroll");
+
+        animateElements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+          const windowHeight = window.innerHeight;
+
+          if (elementTop < windowHeight - 100) {
+            element.classList.add("animate");
+          }
+        });
+      });
+
+      // Typed.js konfigürasyonu
+      new Typed("#typed", {
+        strings: [
+          "Fırat Üniversitesi",
+          "Yazılım Mühendisliği",
+          "Mobil Uygulama Geliştirici",
+        ],
+        typeSpeed: 50,
+        backSpeed: 30,
+        backDelay: 2000,
+        loop: true,
+        showCursor: true,
+        cursorChar: "|",
+      });
+
+      // Particles.js konfigürasyonu
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 100,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#ffffff",
+          },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.7,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.1,
+              sync: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.5,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 3,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "grab",
+            },
+            onclick: {
+              enable: true,
+              mode: "push",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              line_linked: {
+                opacity: 1,
+              },
+            },
+            push: {
+              particles_nb: 4,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+    </script>
+
+    <!-- Canlı Sohbet JavaScript -->
+    <script>
+      // Firebase yapılandırması
+      const firebaseConfig = {
+        apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
+        authDomain: "websayfam-6de23.firebaseapp.com",
+        projectId: "websayfam-6de23",
+        storageBucket: "websayfam-6de23.firebasestorage.app",
+        messagingSenderId: "876673752245",
+        appId: "1:876673752245:web:d8c4692cbc86df5b81b2fc",
+        measurementId: "G-WQZXBQRWDN",
+      };
+
+      // Firebase'i başlat
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const analytics = firebase.analytics();
+
+      // Global değişkenler
+      let currentChatId = null;
+      let isAdmin = false;
+      let currentMessageListener = null; // Yeni: Aktif dinleyiciyi takip etmek için
+
+      // Global displayMessage fonksiyonu
+      function displayMessage(message) {
+        if (!message || !message.text) {
+          console.log("Geçersiz mesaj:", message);
+          return;
+        }
+
+        const chatMessages = document.getElementById("chatMessages");
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `message ${
+          message.isAdmin ? "received" : "sent"
+        }`;
+
+        let timeString = "";
+        if (message.timestamp) {
+          if (typeof message.timestamp.toDate === "function") {
+            timeString = message.timestamp.toDate().toLocaleString();
+          } else if (message.timestamp.seconds) {
+            timeString = new Date(
+              message.timestamp.seconds * 1000
+            ).toLocaleString();
+          }
+        }
+
+        messageDiv.innerHTML = `
+          <div class="message-content">
+            <p>${message.text}</p>
+            ${timeString ? `<small>${timeString}</small>` : ""}
+          </div>
+        `;
+
+        chatMessages.appendChild(messageDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        console.log("Mesaj görüntülendi:", message);
+      }
+
+      // Tüm sohbetleri mesajlar sayfasına yükle
+      async function loadAllChatsToPage() {
+        if (!isAdmin) return;
+
+        const chatsList = document.querySelector(".chats-list");
+        if (!chatsList) return;
+
+        chatsList.innerHTML = ""; // Listeyi temizle
+
+        try {
+          const chatsSnapshot = await db
+            .collection("chats")
+            .orderBy("lastMessageTime", "desc")
+            .get();
+
+          chatsSnapshot.forEach((chat) => {
+            const chatData = chat.data();
+            const chatDiv = document.createElement("div");
+            chatDiv.className = "chat-preview";
+
+            chatDiv.innerHTML = `
+              <div class="chat-info">
+                <h3>Sohbet ${chat.id}</h3>
+                <p>${chatData.lastMessage || "Henüz mesaj yok"}</p>
+                <small>${
+                  chatData.lastMessageTime
+                    ? chatData.lastMessageTime.toDate().toLocaleString()
+                    : ""
+                }</small>
+              </div>
+              <button class="view-chat-btn">Sohbeti Görüntüle</button>
+            `;
+
+            // Event listener'ı doğrudan butona ekle
+            const viewButton = chatDiv.querySelector(".view-chat-btn");
+            viewButton.addEventListener("click", () => loadChat(chat.id));
+
+            chatsList.appendChild(chatDiv);
+          });
+        } catch (error) {
+          console.error("Sohbetler yüklenirken hata:", error);
+        }
+      }
+
+      // Belirli bir sohbeti yükle (global scope)
+      async function loadChat(selectedChatId) {
+        try {
+          // Önceki dinleyiciyi temizle
+          if (currentMessageListener) {
+            currentMessageListener();
+            currentMessageListener = null;
+          }
+
+          currentChatId = selectedChatId;
+          const chatMessages = document.getElementById("chatMessages");
+
+          if (!chatMessages) {
+            console.error("Chat messages container bulunamadı");
+            return;
+          }
+
+          // Mevcut mesajları temizle
+          chatMessages.innerHTML = "";
+
+          // Sohbet geçmişini yükle
+          const messagesRef = db
+            .collection("chats")
+            .doc(selectedChatId)
+            .collection("messages")
+            .orderBy("timestamp", "asc");
+
+          // Mevcut mesajları tek seferde yükle
+          const existingMessages = await messagesRef.get();
+          existingMessages.forEach((doc) => {
+            const messageData = doc.data();
+            displayMessage(messageData);
+          });
+
+          // Yeni mesajlar için dinleyici ekle
+          currentMessageListener = messagesRef.onSnapshot((snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+              if (
+                change.type === "added" &&
+                !change.doc.metadata.hasPendingWrites
+              ) {
+                const messageData = change.doc.data();
+                // Mesajın daha önce eklenip eklenmediğini kontrol et
+                const messages =
+                  chatMessages.querySelectorAll(".message-content p");
+                let isDuplicate = false;
+                messages.forEach((msg) => {
+                  if (msg.textContent === messageData.text) {
+                    isDuplicate = true;
+                  }
+                });
+                if (!isDuplicate) {
+                  displayMessage(messageData);
+                }
+              }
+            });
+          });
+
+          // Mesajlar sayfasını gizle ve sohbet widget'ını göster
+          const messagesPage = document.getElementById("messagesPage");
+          if (messagesPage) {
+            messagesPage.style.display = "none";
+          }
+          document.querySelector("main").style.display = "block";
+          document.querySelector(".chat-widget").classList.remove("minimized");
+        } catch (error) {
+          console.error("Sohbet yükleme hatası:", error);
+          alert("Sohbet yüklenirken bir hata oluştu. Lütfen tekrar deneyin.");
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const chatWidget = document.querySelector(".chat-widget");
+        const chatHeader = document.getElementById("chatHeader");
+        const chatToggle = document.getElementById("chatToggle");
+        const messageInput = document.getElementById("messageInput");
+        const sendButton = document.getElementById("sendMessage");
+        const chatMessages = document.getElementById("chatMessages");
+
+        // Benzersiz bir sohbet ID'si oluştur
+        if (!currentChatId) {
+          currentChatId = Math.random().toString(36).substring(2, 15);
+        }
+
+        // Admin girişi için fonksiyon
+        async function adminLogin(password) {
+          if (password === "ilaydaAdmin2024") {
+            isAdmin = true;
+            document.querySelector(".admin-only").style.display = "block";
+            loadAllChats();
+            return true;
+          }
+          return false;
+        }
+
+        // Mesajı gönderme fonksiyonu
+        async function sendMessage() {
+          const message = messageInput.value.trim();
+          if (message) {
+            try {
+              const messageData = {
+                text: message,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                isAdmin: isAdmin,
+                chatId: currentChatId,
+              };
+
+              // Önce chat dökümanını oluştur
+              await db.collection("chats").doc(currentChatId).set(
+                {
+                  createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+                  lastMessage: message,
+                  lastMessageTime:
+                    firebase.firestore.FieldValue.serverTimestamp(),
+                },
+                { merge: true }
+              );
+
+              // Sonra mesajı ekle
+              await db
+                .collection("chats")
+                .doc(currentChatId)
+                .collection("messages")
+                .add(messageData);
+
+              messageInput.value = "";
+            } catch (error) {
+              console.error("Mesaj gönderme hatası:", error);
+              alert("Mesaj gönderilemedi. Lütfen tekrar deneyin.");
+            }
+          }
+        }
+
+        // Tüm sohbetleri yükle (sadece admin için)
+        async function loadAllChats() {
+          if (!isAdmin) return;
+
+          // Eğer mesajlar sayfası zaten varsa, silip yeniden oluştur
+          const existingMessagesPage = document.getElementById("messagesPage");
+          if (existingMessagesPage) {
+            existingMessagesPage.remove();
+          }
+
+          // Mesajlar sayfası içeriğini oluştur
+          const messagesPage = document.createElement("div");
+          messagesPage.id = "messagesPage";
+          messagesPage.className = "messages-page";
+          messagesPage.style.display = "none";
+          messagesPage.innerHTML = `
+            <div class="messages-container">
+              <h2>Gelen Mesajlar</h2>
+              <div class="chats-list"></div>
+            </div>
+          `;
+          document.body.appendChild(messagesPage);
+
+          // Mesajlar linkine tıklandığında
+          document
+            .getElementById("messagesLink")
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              const mainContent = document.querySelector("main");
+              const messagesPage = document.getElementById("messagesPage");
+              const chatWidget = document.querySelector(".chat-widget");
+
+              if (messagesPage.style.display === "none") {
+                mainContent.style.display = "none";
+                messagesPage.style.display = "block";
+                chatWidget.classList.add("minimized");
+                loadAllChatsToPage();
+              }
+            });
+
+          // Ana sayfaya dönüş için event listener
+          document
+            .querySelector('a[href="index.html"]')
+            .addEventListener("click", (e) => {
+              e.preventDefault();
+              const mainContent = document.querySelector("main");
+              const messagesPage = document.getElementById("messagesPage");
+
+              mainContent.style.display = "block";
+              messagesPage.style.display = "none";
+            });
+        }
+
+        // Mesajları dinlemeye başla
+        function loadMessages(chatId) {
+          db.collection("chats")
+            .doc(chatId)
+            .collection("messages")
+            .orderBy("timestamp", "asc")
+            .onSnapshot(
+              (snapshot) => {
+                snapshot.docChanges().forEach((change) => {
+                  if (change.type === "added") {
+                    const message = change.doc.data();
+                    displayMessage(message);
+                  }
+                });
+              },
+              (error) => {
+                console.error("Mesaj yükleme hatası:", error);
+              }
+            );
+        }
+
+        // Event Listeners
+        chatHeader.addEventListener("click", () => {
+          chatWidget.classList.toggle("minimized");
+        });
+
+        sendButton.addEventListener("click", sendMessage);
+        messageInput.addEventListener("keypress", (e) => {
+          if (e.key === "Enter") {
+            sendMessage();
+          }
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "l") {
+            e.preventDefault();
+            const password = prompt("Admin şifresini girin:");
+            if (password) {
+              adminLogin(password);
+            }
+          }
+        });
+
+        // İlk yükleme
+        loadMessages(currentChatId);
+      });
+    </script>
+  </body>
+</html>

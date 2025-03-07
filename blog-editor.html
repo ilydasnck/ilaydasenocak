@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Yazısı Ekle - İlayda Şenocak</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <!-- SimpleMDE Markdown Editor -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+  </head>
+  <body>
+    <a href="blog.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      <span>Blog Sayfasına Dön</span>
+    </a>
+
+    <main class="blog-editor-main">
+      <div class="blog-editor-container">
+        <h1>Yeni Blog Yazısı Ekle</h1>
+
+        <form id="blogForm" class="blog-editor-form">
+          <div class="form-group">
+            <label for="blogTitle">Başlık</label>
+            <input type="text" id="blogTitle" required />
+          </div>
+
+          <div class="form-group">
+            <label for="blogCategory">Kategori</label>
+            <select id="blogCategory" required>
+              <option value="teknoloji">Teknoloji</option>
+              <option value="yazilim">Yazılım</option>
+              <option value="tasarim">Tasarım</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="blogImage">Kapak Görseli</label>
+            <input type="file" id="blogImage" accept="image/*" required />
+            <div id="imagePreview" class="image-preview"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="blogContent">İçerik (Markdown)</label>
+            <textarea id="blogContent" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="blogTags">Etiketler (virgülle ayırın)</label>
+            <input
+              type="text"
+              id="blogTags"
+              placeholder="örn: yapay zeka, teknoloji, gelecek"
+            />
+          </div>
+
+          <div class="button-group">
+            <button type="button" class="preview-btn" onclick="previewBlog()">
+              Önizleme
+            </button>
+            <button type="submit" class="submit-btn">Yayınla</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Önizleme Modal -->
+      <div id="previewModal" class="preview-modal">
+        <div class="preview-content">
+          <span class="close-preview">&times;</span>
+          <div id="previewContainer"></div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // Firebase yapılandırması
+      const firebaseConfig = {
+        // Firebase config buraya gelecek
+      };
+
+      // Firebase'i başlat
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const storage = firebase.storage();
+
+      // Markdown editor'ı başlat
+      const simplemde = new SimpleMDE({
+        element: document.getElementById("blogContent"),
+        spellChecker: false,
+        toolbar: [
+          "bold",
+          "italic",
+          "heading",
+          "|",
+          "quote",
+          "unordered-list",
+          "ordered-list",
+          "|",
+          "link",
+          "image",
+          "|",
+          "preview",
+          "side-by-side",
+          "fullscreen",
+          "|",
+          "guide",
+        ],
+      });
+
+      // Görsel önizleme
+      document
+        .getElementById("blogImage")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              const preview = document.getElementById("imagePreview");
+              preview.innerHTML = `<img src="${e.target.result}" alt="Önizleme">`;
+            };
+            reader.readAsDataURL(file);
+          }
+        });
+
+      // Blog önizleme
+      function previewBlog() {
+        const title = document.getElementById("blogTitle").value;
+        const content = simplemde.value();
+        const modal = document.getElementById("previewModal");
+        const container = document.getElementById("previewContainer");
+
+        container.innerHTML = `
+                <h1>${title}</h1>
+                <div class="preview-content-text">
+                    ${marked(content)}
+                </div>
+            `;
+
+        modal.style.display = "block";
+      }
+
+      // Modal kapatma
+      document.querySelector(".close-preview").onclick = function () {
+        document.getElementById("previewModal").style.display = "none";
+      };
+
+      // Blog gönderme
+      document
+        .getElementById("blogForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+
+          const title = document.getElementById("blogTitle").value;
+          const category = document.getElementById("blogCategory").value;
+          const content = simplemde.value();
+          const tags = document
+            .getElementById("blogTags")
+            .value.split(",")
+            .map((tag) => tag.trim());
+          const imageFile = document.getElementById("blogImage").files[0];
+
+          try {
+            // Görseli yükle
+            const imageRef = storage.ref(
+              `blog-images/${Date.now()}_${imageFile.name}`
+            );
+            await imageRef.put(imageFile);
+            const imageUrl = await imageRef.getDownloadURL();
+
+            // Slug oluştur
+            const slug = title
+              .toLowerCase()
+              .replace(/[^a-z0-9ğüşıöç]/g, "-")
+              .replace(/-+/g, "-")
+              .replace(/^-|-$/g, "");
+
+            // Blog verisini Firestore'a kaydet
+            await db.collection("blog-posts").doc(slug).set({
+              title,
+              category,
+              content,
+              tags,
+              imageUrl,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              author: "İlayda Şenocak",
+            });
+
+            alert("Blog yazısı başarıyla yayınlandı!");
+            window.location.href = "blog.html";
+          } catch (error) {
+            console.error("Hata:", error);
+            alert("Blog yazısı yayınlanırken bir hata oluştu.");
+          }
+        });
+    </script>
+  </body>
+</html>
