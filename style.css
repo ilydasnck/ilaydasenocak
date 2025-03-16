@@ -17,7 +17,7 @@ header {
   position: fixed;
   width: 100%;
   top: 0;
-  z-index: 1000;
+  z-index: 4;
   padding: 1rem 0;
   transition: all 0.3s ease;
 }
@@ -135,6 +135,7 @@ header.scrolled .nav-links a {
   text-align: center;
   color: #fff;
   z-index: 1;
+  overflow: hidden;
 }
 
 .hero::before {
@@ -155,7 +156,7 @@ header.scrolled .nav-links a {
   position: relative;
   max-width: 800px;
   padding: 0 2rem;
-  z-index: 10;
+  z-index: 3;
 }
 
 .hero-content h1 {
@@ -173,10 +174,8 @@ header.scrolled .nav-links a {
 }
 
 .social-links-hero {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin-top: 2rem;
+  position: relative;
+  z-index: 3;
 }
 
 .social-links-hero a {
@@ -197,6 +196,7 @@ header.scrolled .nav-links a {
   left: 50%;
   transform: translateX(-50%);
   animation: bounce 2s infinite;
+  z-index: 3;
 }
 
 .scroll-down a {
@@ -1167,7 +1167,8 @@ footer {
   height: 100vh;
   top: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
+  pointer-events: all;
 }
 
 .typed-cursor {
