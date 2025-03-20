@@ -10,16 +10,29 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
-    <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics-compat.js"></script>
+    <script src="js/util.js"></script>
+    <style>
+      #particles-js {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 2; /* z-index değerini 2'ye ayarlayalım */
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
-    <div id="particles-js"></div>
     <header>
       <nav>
         <div class="hamburger">
@@ -28,14 +41,13 @@
           <span></span>
         </div>
         <ul class="nav-links">
-          <li><a href="index.html">Anasayfa</a></li>
-          <li><a href="#about">Hakkımda</a></li>
-          <li><a href="#portfolio">Deneyimlerim</a></li>
-          <li><a href="portfolio.html">Portfolyo</a></li>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="#contact">İletişim</a></li>
+          <li><a href="#" data-scroll>Anasayfa</a></li>
+          <li><a href="#about" data-scroll>Hakkımda</a></li>
+          <li><a href="#portfolio" data-scroll>Deneyimlerim</a></li>
+          <li><a href="projects.html">Projelerim</a></li>
+          <li><a href="#contact" data-scroll>İletişim</a></li>
           <li class="admin-only" style="display: none">
-            <a href="#messages" id="messagesLink">Mesajlar</a>
+            <a href="#" id="messagesLink">Mesajlar</a>
           </li>
         </ul>
       </nav>
@@ -43,6 +55,7 @@
 
     <main>
       <section class="hero">
+        <div id="particles-js"></div>
         <div class="hero-content">
           <h1 class="animated fadeInUp">İlayda ŞENOCAK</h1>
           <p class="subtitle"><span id="typed"></span></p>
@@ -142,9 +155,7 @@
               <h3>Siber Güvenlik</h3>
               <p>
                 <strong>SiberVatan Dikey Uzmanlık Eğitimi</strong>'ne katılarak
-                bulut güvenliği konusunda eğitim aldım. Web güvenliği alanında
-                çalışarak <strong>XSS güvenlik açıklarını test ettim</strong> ve
-                sızma testleri üzerine deneyim kazandım.
+                bulut güvenliği konusunda eğitim aldım.
               </p>
             </div>
 
@@ -153,9 +164,7 @@
                 <i class="fas fa-code"></i>
               </div>
               <h3>Web Geliştirme</h3>
-              <p>
-                HTML, CSS ve JavaScript ile web projeleri geliştirdim.
-              </p>
+              <p>HTML, CSS ve JavaScript ile web projeleri geliştirdim.</p>
             </div>
 
             <div class="experience-item animate-on-scroll fade-in-up delay-2">
@@ -166,7 +175,8 @@
               <p>
                 <strong>TÜBİTAK STAR</strong> projesine başvurdum.
                 <strong>Afet sonrası psikolojik triyaj</strong> için karar
-                destek sistemi geliştirilmesi üzerine bir araştırmaya katıldım.
+                destek sistemi geliştirilmesi üzerine bir araştırma ekibine
+                katılmayı hedefledim.
               </p>
             </div>
 
@@ -249,27 +259,18 @@
               </div>
             </div>
             <div class="contact-form animate-on-scroll fade-in-right delay-2">
-              <form>
+              <form id="contactForm" class="contact-form">
                 <div class="form-group">
-                  <label for="name">Ad Soyad</label>
-                  <input type="text" id="name" name="name" required />
+                  <label for="name">İsim</label>
+                  <input type="text" id="name" required />
                 </div>
                 <div class="form-group">
-                  <label for="email">E-posta</label>
-                  <input type="email" id="email" name="email" required />
-                </div>
-                <div class="form-group">
-                  <label for="subject">Konu</label>
-                  <input type="text" id="subject" name="subject" required />
+                  <label for="email">Email</label>
+                  <input type="email" id="email" required />
                 </div>
                 <div class="form-group">
                   <label for="message">Mesaj</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="5"
-                    required
-                  ></textarea>
+                  <textarea id="message" required></textarea>
                 </div>
                 <button type="submit" class="submit-btn">Gönder</button>
               </form>
@@ -298,7 +299,7 @@
           <div class="message received">
             <div class="message-content">
               <p>
-                Merhaba, ben İlayda. Sana nasıl yardımcı olabilirim? Sana 1 dk.
+                Merhaba, ben İlayda. Sana nasıl yardımcı olabilirim? Sana 1 saat
                 içinde burada dönmezsem, bana mail adresini bırakabilirsin. 👋
               </p>
             </div>
@@ -335,6 +336,7 @@
       <p>&copy; 2024 Tüm hakları saklıdır.</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
       // Mobil menü için
       document.addEventListener("DOMContentLoaded", function () {
@@ -392,7 +394,90 @@
         cursorChar: "|",
       });
 
-      // Firebase konfigürasyonu
+      // Particles.js konfigürasyonu
+      particlesJS("particles-js", {
+        particles: {
+          number: {
+            value: 80,
+            density: {
+              enable: true,
+              value_area: 800,
+            },
+          },
+          color: {
+            value: "#ffffff",
+          },
+          shape: {
+            type: "circle",
+          },
+          opacity: {
+            value: 0.5,
+            random: false,
+            anim: {
+              enable: false,
+            },
+          },
+          size: {
+            value: 3,
+            random: true,
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+            out_mode: "out",
+            bounce: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: {
+              enable: true,
+              mode: "grab",
+            },
+            onclick: {
+              enable: true,
+              mode: "push",
+            },
+            resize: true,
+          },
+          modes: {
+            grab: {
+              distance: 140,
+              line_linked: {
+                opacity: 1,
+              },
+            },
+            push: {
+              particles_nb: 4,
+            },
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Scroll fonksiyonu
+      function scrollToSection(sectionId) {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: "smooth" });
+        }
+      }
+    </script>
+
+    <!-- Canlı Sohbet JavaScript -->
+    <script>
+      // Firebase yapılandırması
       const firebaseConfig = {
         apiKey: "AIzaSyCaZPKz_i9pKXSyy-eJqN7yjotaC8PZn2w",
         authDomain: "websayfam-6de23.firebaseapp.com",
@@ -579,12 +664,14 @@
 
         // Admin girişi için fonksiyon
         async function adminLogin(password) {
-          if (password === "ilaydaAdmin2024") {
+          if (checkPassword(password)) {
             isAdmin = true;
             document.querySelector(".admin-only").style.display = "block";
             loadAllChats();
+            alert("Admin girişi başarılı!");
             return true;
           }
+          alert("Hatalı şifre!");
           return false;
         }
 
@@ -726,116 +813,80 @@
         loadMessages(currentChatId);
       });
     </script>
-
-    <!-- Particles.js Başlatma -->
     <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        particlesJS("particles-js", {
-          "particles": {
-            "number": {
-              "value": 120,
-              "density": {
-                "enable": true,
-                "value_area": 800
-              }
-            },
-            "color": {
-              "value": "#ffffff"
-            },
-            "shape": {
-              "type": "circle",
-              "stroke": {
-                "width": 0,
-                "color": "#000000"
-              },
-              "polygon": {
-                "nb_sides": 5
-              }
-            },
-            "opacity": {
-              "value": 0.7,
-              "random": false,
-              "anim": {
-                "enable": false,
-                "speed": 1,
-                "opacity_min": 0.1,
-                "sync": false
-              }
-            },
-            "size": {
-              "value": 3,
-              "random": true,
-              "anim": {
-                "enable": false,
-                "speed": 40,
-                "size_min": 0.1,
-                "sync": false
-              }
-            },
-            "line_linked": {
-              "enable": true,
-              "distance": 150,
-              "color": "#ffffff",
-              "opacity": 0.4,
-              "width": 1
-            },
-            "move": {
-              "enable": true,
-              "speed": 6,
-              "direction": "none",
-              "random": false,
-              "straight": false,
-              "out_mode": "out",
-              "bounce": false,
-              "attract": {
-                "enable": false,
-                "rotateX": 600,
-                "rotateY": 1200
-              }
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tüm nav linklerini seç
+        const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+
+        // Her bir link için event listener ekle
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Link'in href'inden hedef section'ı al
+            const targetId = this.getAttribute("href").substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+              // Smooth scroll yap
+              targetElement.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+              });
+
+              // Mobil menüyü kapat
+              const hamburger = document.querySelector(".hamburger");
+              const navLinks = document.querySelector(".nav-links");
+              hamburger.classList.remove("active");
+              navLinks.classList.remove("active");
             }
-          },
-          "interactivity": {
-            "detect_on": "canvas",
-            "events": {
-              "onhover": {
-                "enable": true,
-                "mode": "repulse"
-              },
-              "onclick": {
-                "enable": true,
-                "mode": "push"
-              },
-              "resize": true
-            },
-            "modes": {
-              "grab": {
-                "distance": 400,
-                "line_linked": {
-                  "opacity": 1
-                }
-              },
-              "bubble": {
-                "distance": 400,
-                "size": 40,
-                "duration": 2,
-                "opacity": 8,
-                "speed": 3
-              },
-              "repulse": {
-                "distance": 200,
-                "duration": 0.4
-              },
-              "push": {
-                "particles_nb": 4
-              },
-              "remove": {
-                "particles_nb": 2
-              }
-            }
-          },
-          "retina_detect": true
+          });
         });
       });
     </script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Tüm scroll linklerini seç
+        const scrollLinks = document.querySelectorAll("a[data-scroll]");
+
+        scrollLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Anasayfa linki kontrolü
+            if (this.getAttribute("href") === "#") {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+              return;
+            }
+
+            // Diğer linkler için hedef section'a scroll
+            const targetId = this.getAttribute("href");
+            const targetSection = document.querySelector(targetId);
+
+            if (targetSection) {
+              const headerOffset = 80; // Header yüksekliği
+              const elementPosition = targetSection.getBoundingClientRect().top;
+              const offsetPosition =
+                elementPosition + window.pageYOffset - headerOffset;
+
+              window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth",
+              });
+            }
+
+            // Mobil menüyü kapat
+            const hamburger = document.querySelector(".hamburger");
+            const navLinks = document.querySelector(".nav-links");
+            hamburger.classList.remove("active");
+            navLinks.classList.remove("active");
+          });
+        });
+      });
+    </script>
+    <script src="js/contact.js"></script>
   </body>
 </html>
